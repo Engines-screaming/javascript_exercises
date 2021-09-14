@@ -8,8 +8,9 @@ form.addEventListener('submit', function(e) {
     e.preventDefault();
     createLogo(brandNameInput.value,
         colorInput.value,
-        fontSizeInput.value);
-
+        fontSizeInput.value
+    );
+    brandNameInput.value = '';
 })
 
 function createLogo(brandname, color, fontsize) {
