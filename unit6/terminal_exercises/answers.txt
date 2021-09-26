@@ -36,10 +36,22 @@ How do you jump between words in the terminal?
 - You can jump between words in the terminal using option and an arrow key.
 
 How do you get to the end of a line in terminal?
+- Using ctrl + e
+
 How do you move your cursor to the beginning in terminal?
+- Using ctrl + a
+
 How do you delete a word (without pressing backspace multiple times) in terminal?
+- Using ctrl + w
+
 What is the difference between a terminal and shell?
-What is an absolute path?
-What is an relative path?
+- The terminal is the program that interacts with the shell. The shell is the one in charge of executing the commands.
+
+What is an absolute path? What is an relative path?
+- An absolute path is a path that involves the root path. The relative path is a path relative to your current location.
+
 What is a flag? Give three examples of flags you have used.
+- A flag is an optional argument with a command that provides extra function. The ls command has -a and -l.
+
 What do the r and f flags do with the rm command?
+- The r flag deletes things recursively and the -f flag forces removal of files.
