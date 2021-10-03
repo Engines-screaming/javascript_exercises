@@ -10,7 +10,7 @@
 // attempt at my own map function
 
 function myMap(arr, func) {
-    let new_arr = [];
+    let new_ar r = [];
 
     for (let item in arr) {
         new_arr.push(func(item));
