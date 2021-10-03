@@ -55,7 +55,7 @@ Examples:
     // [{name: 'Elie', title:'instructor'}, {name: 'Tim', title:'instructor'}, {name: 'Matt', title:'instructor'}, {name: 'Colt', title:'instructor'}]
 
 */
-function addKeyAndValue(arr,key,value){
+function addKeyAndValue(arr,key,value) {
     arr.forEach(function(item, index) {
         item[key] = value;
     });
@@ -78,21 +78,27 @@ function vowelCount(str){
     let vowels = ['a', 'e', 'i', 'o', 'u'];
     let counts = {};
 
-    for (let vowel of vowels) {
-        counts[vowel] = 0;
-    }
-
     strArray = Array.from(str.toLowerCase());
 
     // filter vowels in string
     onlyVols = strArray.filter(function(letter) {
-        return vowels.findIndex(letter) !== -1;
+        return vowels.indexOf(letter) !== -1;
     })
+
+    // console.log('vowels:', onlyVols);
 
     // count up vowels
     onlyVols.forEach(function(vowel) {
-        counts[vowel] += 1;
+        if (vowel in counts) {
+            counts[vowel] += 1;
+        } else {
+            counts[vowel] = 1;
+        }
     })
+
+    console.log(counts);
+
+    return counts;
 }
 
 /*
