@@ -85,8 +85,6 @@ function vowelCount(str){
         return vowels.indexOf(letter) !== -1;
     })
 
-    // console.log('vowels:', onlyVols);
-
     // count up vowels
     onlyVols.forEach(function(vowel) {
         if (vowel in counts) {
@@ -95,8 +93,6 @@ function vowelCount(str){
             counts[vowel] = 1;
         }
     })
-
-    console.log(counts);
 
     return counts;
 }
