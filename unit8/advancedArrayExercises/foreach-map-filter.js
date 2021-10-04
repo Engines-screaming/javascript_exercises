@@ -125,7 +125,7 @@ Examples:
 function valTimesIndex(arr){
     return arr.map(function(val, index) {
         return val * index;
-    })
+    });
 }
 
 /*
@@ -136,7 +136,12 @@ Examples:
 */
 
 function extractKey(arr, key){
-    
+    vals = [];
+    arr.map(function(obj) {
+        vals.push(obj[key]);
+    });
+
+    return vals;
 }
 
 /*
