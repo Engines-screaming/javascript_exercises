@@ -215,7 +215,22 @@ Examples:
     removeVowels('ZZZZZZ') // ('zzzzzz')
 */
 
-function removeVowels(str) {}
+function removeVowels(str) {
+    lower = Array.from(str.toLowerCase());
+    vowels = 'aeiou';
+
+    removedVowels = lower.filter(function(letter) {
+        return vowels.indexOf(letter) == -1;
+    });
+
+    // convert back to string
+    result = '';
+    for (let letter of removedVowels) {
+        result += letter;
+    }
+
+    return result;
+}
 
 /*
 Write a function called doubleOddNumbers which accepts an array and returns a new array with all of the odd numbers doubled (HINT - you can use map and filter to double and then filter the odd numbers).
