@@ -152,7 +152,12 @@ Examples:
 */
 
 function extractFullName(arr){
-    
+    names = [];
+    arr.map(function(obj) {
+        names.push(`${obj['first']} ${obj['last']}`);
+    });
+
+    return names;
 }
 
 /*
