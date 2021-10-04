@@ -240,4 +240,14 @@ Examples:
     doubleOddNumbers([4,4,4,4,4]) // []
 */
 
-function doubleOddNumbers(arr) {}
+function doubleOddNumbers(arr) {
+    oddsOnly = arr.filter(function(num) {
+        return num % 2 !== 0;
+    });
+
+    doubled = oddsOnly.map(function(num) {
+        return num * 2;
+    });
+
+    return doubled;
+}
