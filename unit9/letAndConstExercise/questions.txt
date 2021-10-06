@@ -1,0 +1,12 @@
+Quiz
+What is the difference between var and let?
+- using var, you can redeclare the variable. 
+
+What is the difference between var and const?
+- you can not change the value of const, but you can mutate it if it is not a primitive data type
+
+What is the difference between let and const?
+- you can not alter the value of const
+
+What is hoisting?
+- hoisting is declaring the variable at the start of the script, and then assigning the variable a value later
