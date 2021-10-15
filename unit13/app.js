@@ -18,8 +18,9 @@ $("#title").css('font-size', `${pxSize}px`);
 $('ol').append('<li>Eat your vegetables</li>');
 
 // Scratch that; the list is silly. Empty the aside and put a paragraph in it apologizing for the list’s existence.
-$('li').remove();
-$('ol').append("<p>I apologize for this list's silly existence</p>");
+$('aside')
+    .empty()
+    .append($("<p>", {text: "Sorry about the list"}));
 
 // When you change the numbers in the three inputs on the bottom, the background color of the body should change to match whatever the three values in the inputs are.
 
