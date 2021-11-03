@@ -1,5 +1,6 @@
 def print_upper_words(word_list, must_start_with):
-    # TODO
+    '''Takes in list of words and set of letters. Prints out words in the word list that start with 
+    letters in the must_start_with set. '''
     for word in word_list:
         if word[0] in must_start_with:
             print(word.upper())
