@@ -22,3 +22,19 @@ def calculate(operation):
         answer = div(a, b)
     
     return str(answer)
+
+@app.route('/math/<operation>')
+def math_route(operation):
+    b = int(request.args['b'])
+    a = int(request.args['a'])
+    
+    if operation == 'add':
+        answer = add(a, b)
+    elif operation == 'sub':
+        answer = sub(a, b)
+    elif operation == 'mult':
+        answer = mult(a, b)
+    elif operation == 'div':
+        answer = div(a, b)
+    
+    return str(answer)
