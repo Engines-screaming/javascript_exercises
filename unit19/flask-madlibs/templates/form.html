@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Fun Adlibs!{% endblock %}
+
+{% block content %}
+<form action="/madlibs">
+    {% for field in prompts %}
+    <div>
+        <label for="{{ field }}-input">{{ field }}</label>
+        <input name="{{ field }}" type="text">
+    </div>
+   {% endfor %}
+    <button>Submit</button>
+</form>
+{% endblock %}

@@ -16,9 +16,13 @@ story = Story(
 
 @app.route('/')
 def home():
-    return render_template('base.html', madlibs=story.prompts)
+    return render_template('form.html', prompts=story.prompts)
 
 @app.route('/madlibs')
 def generate_madlib():
-    n = request.args.get('noun')
-    return render_template('madlib.html', noun=n)
+    answers = {}
+    for prompt in story.prompts:
+        answers[prompt] = request.args.get(prompt)
+
+    madlib = story.generate(answers)
+    return render_template('madlib.html', madlib=madlib)
