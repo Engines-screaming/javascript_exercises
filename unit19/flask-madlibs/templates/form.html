@@ -5,11 +5,11 @@
 {% block content %}
 <form action="/madlibs">
     {% for field in prompts %}
-    <div>
+    <div class="form-group">
         <label for="{{ field }}-input">{{ field }}</label>
-        <input name="{{ field }}" type="text">
+        <input class="form-control" name="{{ field }}" type="text">
     </div>
    {% endfor %}
-    <button>Submit</button>
+    <button class="btn btn-primary">submit</button>
 </form>
 {% endblock %}
