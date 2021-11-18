@@ -36,6 +36,9 @@ def submit_question():
     '''Stores survey answers and redirects to the next question'''
     a = request.args.get('answer')
     responses.append(a)
-    return redirect(f'/question/{len(responses)}')
 
-    
+    # check if theres more questions, and redirect if there are
+    if len(satisfaction_survey.questions) == len(responses):
+        return render_template('finish.html')
+    else:
+        return redirect(f'/question/{len(responses)}')
