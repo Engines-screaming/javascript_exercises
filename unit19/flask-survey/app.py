@@ -24,11 +24,15 @@ def survey_question(question_num):
     q = satisfaction_survey.questions[question_num]
     c = q.choices
     
-    return render_template('question.html', 
-                            question_num=question_num, 
-                            question=q.question,
-                            next_question_num=question_num + 1,
-                            choices=c)
+    # if questions are accessed out of order, redirect to the last question that needs an answer
+    if len(responses) != question_num:
+        return redirect(f'/question/{len(responses)}')
+    else:
+        return render_template('question.html', 
+                                question_num=question_num, 
+                                question=q.question,
+                                next_question_num=question_num + 1,
+                                choices=c)
 
 
 @app.route('/answer')
