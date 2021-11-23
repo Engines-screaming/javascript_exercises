@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import satisfaction_survey
 
@@ -17,10 +17,13 @@ def homepage():
                             survey_title=satisfaction_survey.title,
                             instructions=satisfaction_survey.instructions)
 
-@app.route('/question/<int:question_num>')
+@app.route('/question/<int:question_num>', methods=['POST'])
 def survey_question(question_num):
     '''renders the question and choices given an index'''
     
+    # start session
+    session['responses'] = []
+
     # if questions are accessed out of order, redirect to the last question that needs an answer
     if len(responses) != question_num:
         flash('You tried to access an invalid question')
