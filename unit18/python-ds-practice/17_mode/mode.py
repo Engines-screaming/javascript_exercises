@@ -11,3 +11,18 @@ def mode(nums):
         >>> mode([2, 2, 3, 3, 2])
         2
     """
+
+    counts = {}
+    for num in nums:
+        if num in counts:
+            counts[num] += 1
+        else:
+            counts[num] = 1
+
+    greatest_num = 0
+    greatest_key = 0
+    for key, value in counts.items():
+        if value > greatest_num:
+            greatest_num = value
+            greatest_key = key
+    return greatest_key
