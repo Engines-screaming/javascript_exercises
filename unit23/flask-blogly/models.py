@@ -25,7 +25,7 @@ class User(db.Model):
                      nullable=False,
                      unique=True)
 
-    image_url = db.Column(db.String(30), nullable=True)
+    image_url = db.Column(db.String(300), nullable=True)
 
     def __repr__(self):
         """Show info about user."""
