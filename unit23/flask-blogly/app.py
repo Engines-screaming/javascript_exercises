@@ -20,9 +20,11 @@ debug = DebugToolbarExtension(app)
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 
+# init db connection
 connect_db(app)
 
 
+# routes
 @app.route('/')
 @app.route('/users')
 def home():
