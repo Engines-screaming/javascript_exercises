@@ -56,3 +56,7 @@ def update_user_and_redirect(user_id):
     # commit changes and redirect to details page
     db.session.commit()
     return redirect(f'/users')
+
+@app.route('/users/new', methods=['GET'])
+def new_user_page():
+    return render_template('new.html')
