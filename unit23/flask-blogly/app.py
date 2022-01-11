@@ -46,14 +46,13 @@ def edit_page(user_id):
 
 @app.route('/users/<int:user_id>/edit', methods=['POST'])
 def update_user_and_redirect(user_id):
-    # TODO: process the edit form returning the user to the /users page
     user = User.query.get_or_404(user_id)
 
     # update values
     user.first_name = request.form['first_name']
     user.last_name = request.form['last_name']
     user.image_url = request.form['image_url']
-
+ 
     # commit changes and redirect to details page
     db.session.commit()
     return redirect(f'/users')
