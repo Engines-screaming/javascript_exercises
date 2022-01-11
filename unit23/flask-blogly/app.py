@@ -55,8 +55,18 @@ def update_user_and_redirect(user_id):
  
     # commit changes and redirect to details page
     db.session.commit()
-    return redirect(f'/users')
+    return redirect('/users')
+
 
 @app.route('/users/new', methods=['GET'])
 def new_user_page():
     return render_template('new.html')
+
+
+@app.route('/users/new', methods=['POST'])
+def submit_new_user():
+    db.session.add(User(first_name=request.form["first_name"],
+                        last_name=request.form["last_name"],
+                        image_url=request.form["image_url"]))
+    db.session.commit()
+    return redirect('/users')
