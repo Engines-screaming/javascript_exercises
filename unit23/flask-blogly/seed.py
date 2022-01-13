@@ -1,7 +1,9 @@
 """Seed file to make sample data for users db."""
 
-from models import User, db
+from models import User, Post, db
 from app import app
+import datetime
+
 
 # if exists drop and create
 db.drop_all()
@@ -15,8 +17,35 @@ lebron = User(first_name='LeBron', last_name='James', image_url='https://upload.
 jack = User(first_name='Jack', last_name='Black', image_url='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Jack_Black_2011_2.jpg/340px-Jack_Black_2011_2.jpg')
 
 # Add new objects to session
-db.session.add(zucc)
-db.session.add(lebron)
-db.session.add(jack)
+db.session.add_all([zucc, lebron, jack])
+
+
+# create posts
+zucc_post1 = Post(title="I am a real human!", 
+                 content="Why doesn't anyone belive that I am human!?",
+                 created_at=datetime.datetime(2022, 12, 2),
+                 user_id=1)
+
+zucc_post2 = Post(title="Mmmmm Water", 
+                 content="I love water it sure feels good on my circuits",
+                 created_at=datetime.datetime(2022, 12, 2),
+                 user_id=1)
+
+lebron_post1 = Post(title="Trading my Son", 
+                 content="Bronny didn't make it into the NBA, so I'm trading him.",
+                 created_at=datetime.datetime(2022, 6, 2),
+                 user_id=2)
+
+lebron_post2 = Post(title="I am in the new space jam", 
+                 content="Go watch space jam. I am in it.",
+                 created_at=datetime.datetime(2022, 12, 4),
+                 user_id=2)
+      
+jack_post = Post(title="YABBA DA DEEBLE DOOO HYEAHAHAHAH", 
+                 content="AAAAAAAAAAAAAAAAAAAA",
+                 created_at=datetime.datetime(2022, 5, 4),
+                 user_id=3)           
+
+db.session.add_all([zucc_post1, zucc_post2, lebron_post1, lebron_post2, jack_post])
 
 db.session.commit()
