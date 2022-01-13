@@ -120,3 +120,12 @@ def delete_post(post_id):
 def edit_post_page(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('edit_post.html', post=post)
+
+
+@app.route('/posts/<int:post_id>/edit', methods=['POST'])
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form["title"]
+    post.content = request.form["content"]
+    db.session.commit()
+    return redirect(f'/posts/{post_id}')
