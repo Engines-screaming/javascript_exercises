@@ -84,3 +84,9 @@ def delete_user(user_id):
 def show_post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', post=post)
+
+
+@app.route('/user/<int:user_id>/posts/new', methods=['GET'])
+def add_new_post(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template('new_post.html', user=user)
