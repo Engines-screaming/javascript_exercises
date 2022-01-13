@@ -3,6 +3,7 @@
 from flask import Flask, render_template, request, redirect
 from models import db, connect_db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
+import datetime
 
 
 app = Flask(__name__)
@@ -86,7 +87,21 @@ def show_post(post_id):
     return render_template('post.html', post=post)
 
 
-@app.route('/user/<int:user_id>/posts/new', methods=['GET'])
-def add_new_post(user_id):
+@app.route('/users/<int:user_id>/posts/new', methods=['GET'])
+def new_form_page(user_id):
     user = User.query.get_or_404(user_id)
     return render_template('new_post.html', user=user)
+
+
+@app.route('/users/<int:user_id>/posts/new', methods=['POST'])
+def add_new_post(user_id):
+    # user = User.query.get_or_404(user_id)
+    new_post = Post(title=request.form['title'],
+                    content=request.form['content'],
+                    created_at=datetime.datetime.now(),
+                    user_id=user_id
+                   )
+                   
+    db.session.add(new_post)
+    db.session.commit()
+    return redirect(f'/users/{user_id}')
