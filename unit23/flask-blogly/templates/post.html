@@ -8,6 +8,8 @@
 <p>by {{ post.user.first_name }}</p>
 
 <button><a href="">Edit</a></button>
-<button><a href="">Cancel</a></button>
-<button><a href="">Delete</a></button>
+<button><a href="/users/{{ post.user.id }}">Cancel</a></button>
+<form action="/posts/{{ post.id }}/delete" method="post">
+    <button type="submit">Delete</button>
+</form>
 {% endblock %}

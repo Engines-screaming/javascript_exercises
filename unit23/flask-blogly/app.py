@@ -101,7 +101,16 @@ def add_new_post(user_id):
                     created_at=datetime.datetime.now(),
                     user_id=user_id
                    )
-                   
+
     db.session.add(new_post)
+    db.session.commit()
+    return redirect(f'/users/{user_id}')
+
+
+@app.route('/posts/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    user_id = post.user.id  # to redirect back to the user's posts
+    db.session.delete(post)
     db.session.commit()
     return redirect(f'/users/{user_id}')
