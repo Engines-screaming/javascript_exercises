@@ -30,3 +30,20 @@ class User(db.Model):
     def __repr__(self):
         """Show info about user."""
         return f"id: {self.id}, first_name: {self.first_name}, last_name: {self.last_name}, img_url: {self.image_url}"
+
+
+class Post(db.Model):
+
+    __tablename__="post"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    title = db.Column(db.String)
+
+    content = db.Column(db.String)
+    
+    created_at = db.Column(db.DateTime)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    user = db.relationship('User', backref='posts')

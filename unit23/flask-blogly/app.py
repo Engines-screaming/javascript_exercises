@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, render_template, request, redirect
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
 
 
@@ -78,3 +78,9 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return redirect('/users')
+
+
+@app.route('/posts/<int:post_id>')
+def show_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', post=post)
