@@ -1,6 +1,6 @@
 """Seed file to make sample data for users db."""
 
-from models import User, Post, db
+from models import User, Post, Tag, PostTag, db
 from app import app
 import datetime
 
@@ -48,4 +48,12 @@ jack_post = Post(title="YABBA DA DEEBLE DOOO HYEAHAHAHAH",
 
 db.session.add_all([zucc_post1, zucc_post2, lebron_post1, lebron_post2, jack_post])
 
+
+# create tags
+cool = Tag(name='cool')
+hot = Tag(name='hot')
+
+db.session.add_all([cool, hot])
+
+# commit all 
 db.session.commit()

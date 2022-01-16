@@ -34,7 +34,7 @@ class User(db.Model):
 
 class Post(db.Model):
 
-    __tablename__="post"
+    __tablename__ = "post"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
@@ -47,3 +47,22 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     user = db.relationship('User', backref='posts')
+
+
+class PostTag(db.Model):
+    
+    __tablename__ = "posttag"
+
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'), primary_key=True)
+
+    tags = db.relationship('Tag', backref='posttag')
+    post = db.relationship('Post', backref='posttag')
+
+
+class Tag(db.Model):
+
+    __tablename__ = "tag"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String, unique=True)

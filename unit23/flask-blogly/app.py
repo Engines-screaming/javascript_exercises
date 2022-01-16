@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, render_template, request, redirect
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag, PostTag
 from flask_debugtoolbar import DebugToolbarExtension
 import datetime
 
@@ -129,3 +129,9 @@ def edit_post(post_id):
     post.content = request.form["content"]
     db.session.commit()
     return redirect(f'/posts/{post_id}')
+
+
+@app.route('/tags')
+def show_tag():
+    tags = Tag.query.order_by('name').all()
+    return render_template('tags.html', tags=tags)
