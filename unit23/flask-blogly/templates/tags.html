@@ -6,8 +6,8 @@
 <h1>Tags</h1>
 <ul>
     {% for tag in tags %}
-    <li><a href="">{{ tag.name }}</a></li>
+    <li><a href="/tags/{{ tag.id }}">{{ tag.name }}</a></li>
     {% endfor %}
 </ul>
-<button><a href="">Add Tag</a></button>
+<button><a href="/tags/new">Add Tag</a></button>
 {% endblock %}

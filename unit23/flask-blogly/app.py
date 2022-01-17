@@ -135,3 +135,36 @@ def edit_post(post_id):
 def show_tag():
     tags = Tag.query.order_by('name').all()
     return render_template('tags.html', tags=tags)
+
+
+@app.route('/tags/new', methods=['GET'])
+def add_tags_page():
+    return render_template('add_tag.html')
+
+
+@app.route('/tags/new', methods=['POST'])
+def add_tag():
+    new_tag = Tag(name=request.form['name'])
+    db.session.add(new_tag)
+    db.session.commit()
+    return redirect('/tags')
+
+
+@app.route('/tags/<int:tag_id>')
+def show_tag_details(tag_id):
+    modified_tag = Tag.query.get_or_404(tag_id)
+    return render_template('tag_details.html', tag=modified_tag)
+
+
+@app.route('/tags/<int:tag_id>/edit', methods=['GET'])
+def edit_tag_page(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('edit_tag.html', tag=tag)
+
+
+@app.route('/tags/<int:tag_id>/edit', methods=['POST'])
+def edit_tag(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    tag.name = request.form['name']
+    db.session.commit()
+    return redirect('/tags')
