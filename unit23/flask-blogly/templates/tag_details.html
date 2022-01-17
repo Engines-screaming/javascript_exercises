@@ -8,5 +8,7 @@
     <li><a href="">Posts relating to tags</a></li>
 </ul>
 <button><a href="/tags/{{ tag.id }}/edit">Edit Tag</a></button>
-<button><a href="">Delete Tag</a></button>
+<form action="/tags/{{ tag.id }}/delete" method="post">
+  <button>Delete Tag</button>
+</form>
 {% endblock %}
