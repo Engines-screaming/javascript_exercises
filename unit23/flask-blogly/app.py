@@ -90,20 +90,31 @@ def show_post(post_id):
 @app.route('/users/<int:user_id>/posts/new', methods=['GET'])
 def new_form_page(user_id):
     user = User.query.get_or_404(user_id)
-    return render_template('new_post.html', user=user)
+    tags = Tag.query.order_by('name').all()
+    return render_template('new_post.html', user=user, tags=tags)
 
 
 @app.route('/users/<int:user_id>/posts/new', methods=['POST'])
 def add_new_post(user_id):
-    # user = User.query.get_or_404(user_id)
+    user = User.query.get_or_404(user_id)
+
+    # add new post
     new_post = Post(title=request.form['title'],
                     content=request.form['content'],
                     created_at=datetime.datetime.now(),
                     user_id=user_id
                    )
-
     db.session.add(new_post)
     db.session.commit()
+
+
+    # add new post tag entries
+    posttags = []
+    for tag_id in request.form.getlist('tag'):
+        posttags.append(PostTag(tag_id=int(tag_id), post_id=new_post.id))
+    db.session.add_all(posttags)
+    db.session.commit()
+
     return redirect(f'/users/{user_id}')
 
 
