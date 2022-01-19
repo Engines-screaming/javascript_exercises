@@ -107,7 +107,6 @@ def add_new_post(user_id):
     db.session.add(new_post)
     db.session.commit()
 
-
     # add new post tag entries
     posttags = []
     for tag_id in request.form.getlist('tag'):
@@ -164,7 +163,8 @@ def add_tag():
 @app.route('/tags/<int:tag_id>')
 def show_tag_details(tag_id):
     modified_tag = Tag.query.get_or_404(tag_id)
-    return render_template('tag_details.html', tag=modified_tag)
+    posttags = modified_tag.posttag
+    return render_template('tag_details.html', tag=modified_tag, posttags=posttags)
 
 
 @app.route('/tags/<int:tag_id>/edit', methods=['GET'])

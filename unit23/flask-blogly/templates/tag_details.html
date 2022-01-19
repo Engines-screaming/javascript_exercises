@@ -5,7 +5,9 @@
 {% block content %}
 <h1>{{ tag.name }}</h1>
 <ul>
-    <li><a href="">Posts relating to tags</a></li>
+  {% for posttag in posttags %}
+  <li><a href="/posts/{{ posttag.post_id }}">{{ posttag.post.title }}</a></li>
+  {% endfor %}
 </ul>
 <button><a href="/tags/{{ tag.id }}/edit">Edit Tag</a></button>
 <form action="/tags/{{ tag.id }}/delete" method="post">
