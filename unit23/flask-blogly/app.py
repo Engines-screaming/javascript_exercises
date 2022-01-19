@@ -129,7 +129,8 @@ def delete_post(post_id):
 @app.route('/posts/<int:post_id>/edit', methods=['GET'])
 def edit_post_page(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('edit_post.html', post=post)
+    tags = Tag.query.all()
+    return render_template('edit_post.html', post=post, tags=tags)
 
 
 @app.route('/posts/<int:post_id>/edit', methods=['POST'])
