@@ -37,16 +37,13 @@ class Post(db.Model):
     __tablename__ = "post"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-
     title = db.Column(db.String)
-
     content = db.Column(db.String)
-    
     created_at = db.Column(db.DateTime)
-
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    
     user = db.relationship('User', backref='posts')
+    tags = db.relationship('Tag', secondary='posttag', backref='posts')
 
 
 class PostTag(db.Model):
