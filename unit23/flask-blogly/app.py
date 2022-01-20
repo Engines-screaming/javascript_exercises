@@ -136,9 +136,26 @@ def edit_post_page(post_id):
 @app.route('/posts/<int:post_id>/edit', methods=['POST'])
 def edit_post(post_id):
     post = Post.query.get_or_404(post_id)
+
+    # update the post title and content
     post.title = request.form["title"]
     post.content = request.form["content"]
     db.session.commit()
+
+    # delete existing tags
+    if len(post.posttag) > 0:
+        for posttag in post.posttag:
+            db.session.delete(posttag)
+
+    # add selected tags
+    for tag_id in request.form.getlist('tag'):
+        db.session.add(PostTag(tag_id=tag_id, post_id=post_id))
+    db.session.commit()
+
+    # # troubleshooting delete later
+    # import pdb
+    # pdb.set_trace()
+
     return redirect(f'/posts/{post_id}')
 
 
