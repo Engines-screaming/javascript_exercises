@@ -18,10 +18,6 @@ connect_db(app)
 @app.route('/api/cupcakes')
 def list_cupcakes():
     cupcakes = [cupcake.serialize() for cupcake in Cupcake.query.all()]
-
-    # import pdb
-    # pdb.set_trace()
-
     return jsonify({'cupcakes': cupcakes})
 
 @app.route('/api/cupcakes', methods=['POST'])
@@ -37,11 +33,11 @@ def create_cupcake():
     cupcake = Cupcake(**cupcake_dict)
     db.session.add(cupcake)
     db.session.commit()
-    return jsonify(cupcake.serialize())
+    return jsonify({'cupcake': cupcake.serialize()})
 
 @app.route('/api/cupcakes/<int:cupcake_id>')
 def cupcake_details(cupcake_id):
     cupcake = Cupcake.query.get_or_404(cupcake_id)
-    return jsonify(cupcake.serialize())
+    return jsonify({'cupcake': cupcake.serialize()})
 
 
