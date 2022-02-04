@@ -23,17 +23,17 @@ def list_cupcakes():
 @app.route('/api/cupcakes', methods=['POST'])
 def create_cupcake():
     cupcake_dict = {
-        'id': request.data['id'],
-        'flavor': request.data['flavor'],
-        'size': request.data['size'],
-        'rating': request.data['rating'],
-        'image': request.data['image']
+        # 'id': request.json['id'],
+        'flavor': request.json['flavor'],
+        'size': request.json['size'],
+        'rating': request.json['rating'],
+        'image': request.json['image']
     }
 
     cupcake = Cupcake(**cupcake_dict)
     db.session.add(cupcake)
     db.session.commit()
-    return jsonify({'cupcake': cupcake.serialize()})
+    return (jsonify({'cupcake': cupcake.serialize()}), 201)
 
 @app.route('/api/cupcakes/<int:cupcake_id>')
 def cupcake_details(cupcake_id):
