@@ -14,6 +14,9 @@ debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
+@app.route('/')
+def homepage():
+    return render_template('index.html')
 
 @app.route('/api/cupcakes')
 def list_cupcakes():
@@ -23,7 +26,6 @@ def list_cupcakes():
 @app.route('/api/cupcakes', methods=['POST'])
 def create_cupcake():
     cupcake_dict = {
-        # 'id': request.json['id'],
         'flavor': request.json['flavor'],
         'size': request.json['size'],
         'rating': request.json['rating'],
@@ -52,7 +54,6 @@ def update_cupcake(cupcake_id):
 
     db.session.commit()
     return jsonify(cupcake=cupcake.serialize())
-
 
 @app.route('/api/cupcakes/<int:cupcake_id>', methods=["DELETE"])
 def delete_cupcake(cupcake_id):
