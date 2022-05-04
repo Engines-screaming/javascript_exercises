@@ -3,12 +3,16 @@ const fs = require("fs");
 const axios = require("axios");
 
 function cat(path) {
-    fs.readFile(path, "utf-8", (err, data) => {
-        if (err) {
-            console.log(`Error reading ${path}: ${err}`);
-        }
-        console.log(data);
-    })
+    if (path.includes('.txt')) {
+        fs.readFile(path, "utf-8", (err, data) => {
+            if (err) {
+                console.log(`Error reading ${path}: ${err}`);
+            }
+            console.log(data);
+        })
+    } else {
+        webCat(path);
+    }
 }
 
 function webCat(url) {
@@ -22,4 +26,4 @@ function webCat(url) {
 }
 
 const argv = process.argv
-webCat(argv[2]);
+cat(argv[2]);
