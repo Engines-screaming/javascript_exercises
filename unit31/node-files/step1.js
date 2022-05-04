@@ -15,17 +15,17 @@
 // Error reading huh.txt:
 //   Error: ENOENT: no such file or directory, open 'huh.txt'
 
-const fs = require("fs")
+const fs = require("fs");
 
 
 function cat(path) {
     fs.readFile(path, "utf-8", (err, data) => {
         if (err) {
-            console.log(`Error reading ${path}: ${err}`)
+            console.log(`Error reading ${path}: ${err}`);
         }
-        console.log(data)
+        console.log(data);
     })
 }
 
-cat("one.txt")
-cat("onesdfasdf.txt")
+cat("one.txt");
+cat("onesdfasdf.txt");
