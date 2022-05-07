@@ -18,6 +18,28 @@ class MarkovMachine {
 
   makeChains() {
     // TODO
+    // const uniqueWords = this.words;
+    const initVal = {};
+    this.wordMap = this.words.reduce(function(prevVal, currVal) {
+      // if there isnt a next index, return
+      let nextIndex = this.words.indexOf(currVal) + 1;
+
+      if (nextIndex < this.words.length) {
+        markovWords.push(this.words[nextIndex]);
+      } else {
+        return prevVal;
+      }
+
+      // if currVal is a key, add to existing value
+      // else, create the key and add new value
+      if (preVal.hasOwnProperty(currVal)) {
+        prevVal[currVal].push(this.words[nextIndex]);
+      } else {
+        const markovWords = [];
+        markovWords.push(this.words[nextIndex]);
+        preVal[currVal] = markovWords;
+      } 
+    }, initVal);
   }
 
 
