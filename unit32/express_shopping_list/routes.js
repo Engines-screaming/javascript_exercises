@@ -5,13 +5,16 @@ const router = new express.Router();
 const items = require('./fakeDB');
 
 router.get('/items', (req, res) => {
-    // TODO
+    // returns list of shopping items
     return res.json(items);
 });
 
-// router.post('/items', (req, res) => {
-//     // TODO
-// });
+router.post('/items', (req, res) => {
+    // accepts json data and adds it to shopping list
+    const newItem = {name: req.query.name, price: req.query.price};
+    items.push(newItem);
+    return res.json({added: newItem});
+});
 
 // router.get('/items/:name', (req, res) => {
 //     // TODO
