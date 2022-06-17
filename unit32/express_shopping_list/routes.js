@@ -16,9 +16,10 @@ router.post('/items', (req, res) => {
     return res.json({added: newItem});
 });
 
-// router.get('/items/:name', (req, res) => {
-//     // TODO
-// });
+router.get('/items/:name', (req, res) => {
+    const searchedItem = items.find(item => item.name === req.params.name);
+    return res.json(searchedItem);
+});
 
 // router.patch('/items/:name', (req, res) => {
 //     // TODO
