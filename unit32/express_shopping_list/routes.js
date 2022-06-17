@@ -21,9 +21,16 @@ router.get('/items/:name', (req, res) => {
     return res.json(searchedItem);
 });
 
-// router.patch('/items/:name', (req, res) => {
-//     // TODO
-// });
+router.patch('/items/:name', (req, res) => {
+    for (let item in items) {
+        if (item.name === req.body.name) {
+            item.price = req.body.price;
+        };
+    };
+    console.log(items);
+    
+    return res.json({updated: {name: req.body.name, price: req.body.price}});
+});
 
 // router.delete('/items/:name', (req, res) => {
 //     // TODO
