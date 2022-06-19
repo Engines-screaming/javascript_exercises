@@ -11,7 +11,7 @@ router.get('/items', (req, res) => {
 
 router.post('/items', (req, res) => {
     // accepts json data and adds it to shopping list
-    const newItem = {name: req.query.name, price: req.query.price};
+    const newItem = {name: req.body.name, price: req.body.price};
     items.push(newItem);
     return res.json({added: newItem});
 });
@@ -33,7 +33,6 @@ router.patch('/items/:name', (req, res) => {
 });
 
 router.delete('/items/:name', (req, res) => {
-    // TODO
     let itemIndex = 0;
     for (let i = 0; i < items.length; i++) {
         if (items[i].name === req.body.name) {

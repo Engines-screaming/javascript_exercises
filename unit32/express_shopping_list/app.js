@@ -8,6 +8,13 @@ app.use(express.urlencoded({ extended: true }));
 const routes = require('./routes');
 app.use('/', routes);
 
-app.listen('3000', function(){
-    console.log('server starting on port 3000')
-})
+
+// // error handling
+// app.use((err, req, res, next) => {
+//     res.status(err.status || 500);
+//     return res.json({
+//         error: err.message
+//     });
+// });
+
+module.exports = app
