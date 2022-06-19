@@ -28,12 +28,21 @@ router.patch('/items/:name', (req, res) => {
         };
     };
     console.log(items);
-    
+
     return res.json({updated: {name: req.body.name, price: req.body.price}});
 });
 
-// router.delete('/items/:name', (req, res) => {
-//     // TODO
-// });
+router.delete('/items/:name', (req, res) => {
+    // TODO
+    let itemIndex = 0;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].name === req.body.name) {
+            itemIndex = i;
+        };
+    };
+
+    items.splice(1,1);
+    return res.json({message: "deleted"});
+});
 
 module.exports = router;
