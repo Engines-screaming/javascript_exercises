@@ -2,7 +2,7 @@ const express = require('express');
 const router = new express.Router();
 
 // fake db
-const items = require('./fakeDB');
+const items = require('../fakeDB');
 
 router.get('/items', (req, res) => {
     // returns list of shopping items
