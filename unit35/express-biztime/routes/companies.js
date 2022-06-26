@@ -22,4 +22,41 @@ router.get('/:code', async function(req, res, next) {
     }
 });
 
+// POST /companies
+// Adds a company.
+
+// Needs to be given JSON like: {code, name, description}
+
+// Returns obj of new company: {company: {code, name, description}}
+router.post('/', async function(req, res, next) {
+    try {
+        const { code, name, description } = req.body;
+        const results = await db.query(`INSERT INTO companies (code, name, description)
+                                            VALUES ($1, $2, $3) RETURNING code, name, description`, [code, name, description]);
+        return res.status(201).json({company: results.rows[0]});
+    } catch (e) {
+        return next(e);
+    }
+});
+
+
+// PUT /companies/[code]
+// Edit existing company.
+
+// Should return 404 if company cannot be found.
+
+// Needs to be given JSON like: {name, description}
+
+// Returns update company object: {company: {code, name, description}}
+
+
+
+
+// DELETE /companies/[code]
+// Deletes company.
+
+// Should return 404 if company cannot be found.
+
+// Returns {status: "deleted"}
+
 module.exports = router;
