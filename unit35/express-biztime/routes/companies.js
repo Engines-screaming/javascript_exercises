@@ -22,12 +22,6 @@ router.get('/:code', async function(req, res, next) {
     }
 });
 
-// POST /companies
-// Adds a company.
-
-// Needs to be given JSON like: {code, name, description}
-
-// Returns obj of new company: {company: {code, name, description}}
 router.post('/', async function(req, res, next) {
     try {
         const { code, name, description } = req.body;
@@ -48,6 +42,20 @@ router.post('/', async function(req, res, next) {
 // Needs to be given JSON like: {name, description}
 
 // Returns update company object: {company: {code, name, description}}
+router.put('/:code', async function(req, res, next) {
+    try {
+        const companyCode = req.params.code;
+        const { name, description } = req.body;
+        const result = await db.query(`UPDATE companies SET name=$1, description=$2
+                                        WHERE code=$3
+                                        RETURNING code, name, description`, 
+                                        [name, description, companyCode]
+        );
+        return res.json({companies: result.rows[0]});
+    } catch(e) {
+        return next(e);
+    }
+});
 
 
 
