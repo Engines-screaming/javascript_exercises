@@ -48,12 +48,6 @@ router.put('/:code', async function(req, res, next) {
   }
 });
 
-// DELETE /companies/[code]
-// Deletes company.
-
-// Should return 404 if company cannot be found.
-
-// Returns {status: "deleted"}
 router.delete('/:code', async function(req, res, next) {
   try {
     const companyCode = req.params.code;
