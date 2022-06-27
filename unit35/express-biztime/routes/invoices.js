@@ -14,13 +14,6 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-
-// GET /invoices/[id]
-// Returns obj on given invoice.
-
-// If invoice cannot be found, returns 404.
-
-// Returns {invoice: {id, amt, paid, add_date, paid_date, company: {code, name, description}}}
 router.get('/:id', async function(req, res, next) {
   try {
     const cid = req.params.id;
@@ -42,15 +35,19 @@ router.get('/:id', async function(req, res, next) {
   }
 });
 
-
-// POST /invoices
-// Adds an invoice.
-
-// Needs to be passed in JSON body of: {comp_code, amt}
-
-// Returns: {invoice: {id, comp_code, amt, paid, add_date, paid_date}}
-
-
+router.post('/', async function(req, res, next) {
+  try {
+    const { comp_code, amt } = req.body;
+    const results = await db.query(`INSERT INTO invoices (comp_code, amt) 
+                                    VALUES ($1, $2)
+                                    RETURNING id, comp_code, amt, paid, add_date, paid_date`, 
+                                   [comp_code, amt]
+    );
+    return res.json({invoice: results.rows[0]});
+  } catch(e) {
+    next(e);
+  }
+});
 
 
 // PUT /invoices/[id]
