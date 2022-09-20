@@ -25,9 +25,11 @@ class Stack {
     if (this.first === null) {
       this.first = newNode;
       this.last = newNode;
+      this.size += 1;
     } else {
       newNode.next = this.first;
       this.first = newNode;
+      this.size += 1;
     }
   }
 
@@ -35,19 +37,27 @@ class Stack {
    * and return its value. Should throw an error if the stack is empty. */
 
   pop() {
-
+    if (this.first === null) {
+      throw new Error;
+    } else {
+      const oldFirst = this.first;
+      const newFirst = this.first.next;
+      this.first = newFirst;
+      this.size -= 1;
+      return oldFirst.val;
+    }
   }
 
   /** peek(): return the value of the first node in the stack. */
 
   peek() {
-
+    return this.first.val;
   }
 
   /** isEmpty(): return true if the stack is empty, otherwise false */
 
   isEmpty() {
-
+    return this.first === null;
   }
 }
 
